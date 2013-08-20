@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+@model Medlebox.Models.User
+<div style="position:absolute;bottom:50%; left:20%;"><img alt="Medlebox" src="/Content/images/stroke.png"/></div>
+<div style="position:absolute;top:50%;height:50%;background-color:#46074f;left:0px;width:100%;" >test</div>
+
+@using (Html.BeginForm())
+{
+<div id="loginform" class="modal" style="top:30%!important;width:300px;left:70%;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-body">
+			    <div class="input-prepend">
+				<span class="add-on"><i class="icon-envelope"></i></span>
+					@Html.TextBoxFor(model => model.UserName, new { @class = "inline-block" })
+				</div>
+	
+			    <div class="input-prepend">
+				<span class="add-on"><i class="icon-lock"></i></span>
+					@Html.PasswordFor(model => model.Password, new { @class = "inline-block" })
+				</div>
+  </div>
+<div class="modal-footer">
+		@Html.ValidationMessageFor(model => model)
+	       <input type="submit" value="Вход"class=" btn btn-primary" /> 
+	       
+</div>
+</div>
+}
+<script type="text/javascript">
+    $('#loginform').modal({
+        keyboard: false,
+        backdrop: false
+    }).css(
+                {
+                    'margin-top': function () {
+                        return -($(this).height() / 2);
+                    },
+                    'margin-left': function () {
+                        return -($(this).width() / 2);
+                    }
+    });
+
+</script>

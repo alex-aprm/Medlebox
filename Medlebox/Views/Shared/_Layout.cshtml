@@ -4,24 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/bootstrap/base")
-    @Styles.Render("~/Content/bootstrap/theme")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Styles.Render("~/Content/bootstrap")
+        @Styles.Render("~/Content/Site.css")
+        @Styles.Render("~/Content/bootstrap-responsive")
 </head>
 <body>
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <a class="brand" href="#">Title</a>
-    <ul class="nav">
-      <li class="active"><a href="#">Home</a></li>
+   <div class="container">
+    <a class="brand" href="#">Medlebox</a>
+    @if (ViewBag.LoggedIn){
+    <ul class="nav pull-right">
+      <li class="active"><a href="#">Плеер</a></li>
       <li><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li>
+      <li><a href="#">Профиль</a></li>
     </ul>
+    }
+    </div>
   </div>
-</div></div>
+</div>
+
+
+
+
     @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>
