@@ -1,3 +1,5 @@
+using Medlebox.Models;
+
 namespace Medlebox.Migrations
 {
     using System;
@@ -26,6 +28,9 @@ namespace Medlebox.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            context.Users.AddOrUpdate(
+u => u.Email,
+new User("alex.aprm@gmail.com", "1"));
         }
     }
 }

@@ -2,13 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Medlebox.Models
 {
     public class User
     {
-        public string UserName { get; set; }
+        public User()
+        {
+            this.Gid = Guid.NewGuid();
+        }
+        public User(string email, string password)
+            : this()
+        {
+            this.Email = email;
+            SHA1 sha = new SHA1CryptoServiceProvider();
+            this.PwdHash = sha.ComputeHash(Encoding.ASCII.GetBytes(password + email.ToLower()));
+        }
+        [Key]
+        public Guid Gid { get; set; }
+        [MaxLength(200)]
+        public string Email { get; set; }
+        [MaxLength(200)]
+        public string Nickname { get; set; }
+        [NotMapped]
         public string Password { get; set; }
+        [NotMapped]
         public string PasswordConfirm { get; set; }
+        [MaxLength(500)]
+        public byte[] PwdHash { get; set; }
+        public bool TryLogin()
+        {
+            SHA1 sha = new SHA1CryptoServiceProvider();
+            byte[] PwdHash = sha.ComputeHash(Encoding.ASCII.GetBytes(this.Password + this.Email.ToLower()));
+            return PwdHash.SequenceEqual(this.PwdHash);
+        }
     }
 }

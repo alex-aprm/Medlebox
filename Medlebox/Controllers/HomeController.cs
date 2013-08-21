@@ -6,7 +6,8 @@ using System.Web.Mvc;
 
 namespace Medlebox.Controllers
 {
-    public class HomeController : CoreController
+    [Authorize]
+    public class HomeController : BaseController
     {
         //
         // GET: /Home/

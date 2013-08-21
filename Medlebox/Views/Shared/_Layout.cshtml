@@ -18,8 +18,8 @@
     @if (ViewBag.LoggedIn){
     <ul class="nav pull-right">
       <li class="active"><a href="#">Плеер</a></li>
-      <li><a href="#">Link</a></li>
       <li><a href="#">Профиль</a></li>
+      <li><a href="@Url.Action("Logout","Users")">Выход</a></li>
     </ul>
     }
     </div>
