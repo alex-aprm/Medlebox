@@ -1,0 +1,19 @@
+﻿@model Medlebox.Models.User
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Профиль @Model.Name</h2>
+
+@using (Html.BeginForm("Profile", "Users", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+    <fieldset>
+        @Html.EditorFor(m => m)
+
+<div class="form-actions">
+                    <input type="submit" class="btn btn-large btn-primary" value="Сохранить" id="btn-save" data-action="" />
+    </div>
+</fieldset>
+}

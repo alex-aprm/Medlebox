@@ -28,9 +28,10 @@ namespace Medlebox.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            context.Users.AddOrUpdate(
-u => u.Email,
-new User("alex.aprm@gmail.com", "1"));
+            if (context.Users.FirstOrDefault(u => u.Email == "alex.aprm@gmail.com") == null)
+                context.Users.AddOrUpdate(
+    u => u.Email,
+    new User("alex.aprm@gmail.com", "1"));
         }
     }
 }

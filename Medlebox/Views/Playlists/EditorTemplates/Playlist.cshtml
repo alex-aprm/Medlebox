@@ -1,0 +1,9 @@
+﻿@model Medlebox.Models.Playlist
+
+@Html.HiddenFor(m=>m.Gid)
+
+<div class="control-group">
+			<label class="control-label">Название</label>
+			<div class="controls">@Html.TextBoxFor(model => model.Name, new { @class = "span5" })  @Html.ValidationMessageFor(model => model.Name)</div>
+		</div>
+

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Medlebox.Models.Playlist>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Плейлисты</h2>
+<div class="row-fluid ">
+<div class="span7">
+<table class="table">
+    @foreach (Medlebox.Models.Playlist p in Model)
+    {
+    <tr>
+        <td style="width:10px"><i class="icon-play"></i></td>
+        <td><a href="@Url.Action("Songs", "Playlists", new { id = p.Gid })">@Html.DisplayFor(m=>p.Name)</a></td>
+        <td style="width:32px"><a href="@Url.Action("Edit", "Playlists", new { id = p.Gid })"><i class="icon-pencil"></i></a>
+                             <a href="@Url.Action("Delete", "Playlists", new { id = p.Gid })"><i class="icon-remove"></i></a></td>
+    </tr>
+    }
+</table>
+    <i class="icon-plus"></i> <a href="@Url.Action("Edit", "Playlists", new { id = Guid.NewGuid() })">Добавить новый</a>
+</div>
+<div class="span5 well">
+<h4>Создавайте списки воспроизведения.</h4>
+    <p>Создайт новый список, добавьте музыку. Для праздника или для души.</p>
+<h4>Делитесь с друзьями.</h4>
+     <p>Скопируйте ссылку на список, предоставьте доступ друзьям. Они смогут слушать то же, что и вы, либо изменить.</p>
+   </div>
+    </div>

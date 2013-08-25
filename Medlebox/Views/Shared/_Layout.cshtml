@@ -1,4 +1,7 @@
 ﻿<!DOCTYPE html>
+@{
+    ViewBag.AdditionalContainerClass=ViewBag.AdditionalContainerClass??"whitesheet";
+}
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,20 +9,26 @@
     <title>@ViewBag.Title</title>
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/typeahead")
+        @Styles.Render("~/Content/typeahead")
         @Styles.Render("~/Content/bootstrap")
         @Styles.Render("~/Content/Site.css")
         @Styles.Render("~/Content/bootstrap-responsive")
+    <script src="~/Scripts/Custom/PrometheusModelValidation.js"></script>
+    <script src="~/Scripts/Custom/PrometheusForms.js"></script>
 </head>
-<body>
+<body class="@ViewBag.AdditionalContainerClass">
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
    <div class="container">
-    <a class="brand" href="#">Medlebox</a>
+    <a class="brand" href="/">Medlebox</a>
     @if (ViewBag.LoggedIn){
     <ul class="nav pull-right">
-      <li class="active"><a href="#">Плеер</a></li>
-      <li><a href="#">Профиль</a></li>
-      <li><a href="@Url.Action("Logout","Users")">Выход</a></li>
+      <li class=""><a href="/">Плеер</a></li>
+      <li class=""><a href="@Url.Action("Index", "Playlists", new { Reset = true })" data-controller="playlists">Плейлисты</a></li>
+      <li class=""><a href="#">Поиск</a></li>
+      <li class=""><a href="@Url.Action("Profile","Users", new { Reset = true })" data-controller="users">Профиль</a></li>
+      <li class=""><a href="@Url.Action("Logout","Users", new { Reset = true })">Выход</a></li>
     </ul>
     }
     </div>
@@ -27,10 +36,19 @@
 </div>
 
 
-
-
+    <div class="container ">
     @RenderBody()
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <script type="text/javascript">
+        currenturl = "@ViewBag.Controller";
+        $("a[data-controller='" + currenturl + "']").parent().toggleClass("active");
+    </script>
+        <script type="text/javascript">
+            BindEvents();
+    </script>
+
 </body>
 </html>

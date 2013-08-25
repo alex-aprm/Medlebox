@@ -1,0 +1,12 @@
+﻿@model System.DateTime?
+@{
+    if (Model!=null)
+    {
+    DateTime dd = Model ?? DateTime.MinValue;
+    @Html.Raw(dd.ToShortDateString());
+    if (TimeSpan.Compare(dd.TimeOfDay,new TimeSpan(0,0,0))==1)
+    {
+        @:@Html.Raw(dd.ToLongTimeString())   
+    }
+}
+}

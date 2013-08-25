@@ -1,0 +1,24 @@
+﻿@{
+    
+    if (ViewData.Model is Enum)
+    {
+
+        bool AllowNotSet = false;
+        AllowNotSet = (bool?)ViewData["AllowNotSet"] == true;
+   var o = ViewData.ModelMetadata;
+   Enum model = (Enum)ViewData.Model;
+
+   Type T = model.GetType();
+
+   @Html.DropDownList("Combo",
+   (from object e in Enum.GetValues(T) where e.ToString()!="NotSet" || AllowNotSet select new SelectListItem { Value = e.ToString(), Text = Weathertop.EnumHelper<object>.GetDisplayValue(e).ToString() }
+   ),
+             new { @class = ViewData["class"]})
+
+    @Html.HiddenFor(m => m, new {data_val=ViewData["data_val"], data_val_refresh_id=ViewData["data_val_refresh_id"] })
+    <script type="text/javascript">
+        SetCombo('@(ViewData.TemplateInfo.HtmlFieldPrefix)');
+   </script>  
+}
+
+}

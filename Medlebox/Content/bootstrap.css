@@ -213,12 +213,12 @@ body {
 }
 a {
   color: #46074f;
-  text-decoration: none;
+  text-decoration: underline;
 }
 a:hover,
 a:focus {
   color: #080109;
-  text-decoration: underline;
+  text-decoration: none;
 }
 .img-rounded {
   -webkit-border-radius: 6px;

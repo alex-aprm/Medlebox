@@ -1,32 +1,24 @@
 ﻿@{
     ViewBag.Title = "Login";
+    ViewBag.AdditionalContainerClass="";
 }
 @model Medlebox.Models.User
 <div style="position:absolute;bottom:50%; left:20%;"><img alt="Medlebox" src="/Content/images/stroke.png"/></div>
-<div style="position:absolute;top:50%;height:50%;background-color:#46074f;left:0px;width:100%;" >test</div>
+<div style="position:absolute;top:50%;height:50%;background-color:#46074f;left:0px;width:100%;" ></div>
 
-@using (Html.BeginForm())
+<div style="position:absolute;bottom:50%; left:50%;">
+@using (Html.BeginForm("Login", "Users", FormMethod.Post, new { @class = "form-inline" }))
 {
-<div id="loginform" class="modal" style="top:30%!important;width:300px;left:70%;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-body">
-			    <div class="input-prepend">
-				<span class="add-on"><i class="icon-envelope"></i></span>
-					@Html.TextBoxFor(model => model.Email, new { @class = "inline-block" })
-				</div>
-	
-			    <div class="input-prepend">
-				<span class="add-on"><i class="icon-lock"></i></span>
-					@Html.PasswordFor(model => model.Password, new { @class = "inline-block" })
-				</div>
-  </div>
-<div class="modal-footer">
-		@Html.ValidationMessageFor(model => model)
-	       <input type="submit" value="Вход"class=" btn btn-primary" /> 
-	       
-</div>
-</div>
+		@Html.TextBoxFor(model => model.Email, new { @class = "span2", placeholder="Почта" })
+		@:&nbsp;@Html.PasswordFor(model => model.Password, new { @class = "span2", placeholder="Пароль" })
+	    @:&nbsp;<input type="submit" value="Вход"class=" btn btn-primary" /> 
 }
-<script type="text/javascript">
+</div>		
+<div style="position:absolute;top:50%; left:50%;padding-top:15px;">
+    @Html.ValidationMessageFor(model => model, "", new { style = "color:white;" })
+    <a href="@Url.Action("Signin")" class="white" >Новый пользователь?</a>
+</div>
+@*<script type="text/javascript">
     $('#loginform').modal({
         keyboard: false,
         backdrop: false
@@ -40,4 +32,4 @@
                     }
     });
 
-</script>
+</script>*@

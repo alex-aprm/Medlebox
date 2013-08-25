@@ -215,18 +215,17 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }, 0)
   }
 
-  Button.prototype.toggle = function () {
-    var $parent = this.$element.closest('[data-toggle="buttons"]')
+                     Button.prototype.toggle = function () {
+    var $parent = this.$element.closest('[data-toggle="buttons-radio"]')
+    var css = $parent.attr("data-toggle-css");
+    if (css == undefined) css = 'btn-primary';
+    $parent && $parent
+      .find('.active,.'+css)
+      .removeClass('active '+css)
 
-    if ($parent.length) {
-      var $input = this.$element.find('input')
-        .prop('checked', !this.$element.hasClass('active'))
-        .trigger('change')
-      if ($input.prop('type') === 'radio') $parent.find('.active').removeClass('active')
-    }
-
-    this.$element.toggleClass('active')
+    this.$element.toggleClass('active '+css)
   }
+
 
 
   // BUTTON PLUGIN DEFINITION

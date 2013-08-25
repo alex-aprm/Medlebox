@@ -12,6 +12,8 @@ namespace Medlebox.App_Start
 			// Add @Scripts.Render("~/bundles/bootstrap") after jQuery in your _Layout.cshtml view
 			// When <compilation debug="true" />, MVC4 will render the full readable version. When set to <compilation debug="false" />, the minified version will be rendered automatically
             BundleTable.Bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js", "~/Scripts/bootstrap-datepicker.js"));
+            BundleTable.Bundles.Add(new ScriptBundle("~/bundles/typeahead").Include("~/Scripts/Typeahead.js"));
+            BundleTable.Bundles.Add(new StyleBundle("~/Content/typeahead").Include("~/Content/Typeahead.css"));
             BundleTable.Bundles.Add(new StyleBundle("~/Content/bootstrap").Include("~/Content/bootstrap.css", "~/Content/bootstrap-datepicker.css"));
             BundleTable.Bundles.Add(new StyleBundle("~/Content/bootstrap-responsive").Include("~/Content/bootstrap-responsive.css"));
         }

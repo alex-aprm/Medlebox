@@ -1,0 +1,18 @@
+﻿@model Medlebox.Models.Playlist
+
+@{
+    ViewBag.Title = "Плейлист";
+}
+
+<h2>Плейлист</h2>
+
+@using (Html.BeginForm("Delete", "Playlists", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+    <fieldset>
+<h4>Удалить плейлист "@Html.DisplayFor(m=>m.Name)"?</h4>
+<div class="form-actions">
+                    <input type="submit" class="btn btn-large btn-danger" value="Удалить" id="btn-save" data-action="" />
+    </div>
+</fieldset>
+}

@@ -145,6 +145,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\SongsAPIController.cs" />
+    <Compile Include="Controllers\SongsController.cs" />
+    <Compile Include="Controllers\PlaylistsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\CoreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -159,8 +162,25 @@
     <Compile Include="Migrations\201308211650507_UsersMigration.Designer.cs">
       <DependentUpon>201308211650507_UsersMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308221608372_UsersMigration1.cs" />
+    <Compile Include="Migrations\201308221608372_UsersMigration1.Designer.cs">
+      <DependentUpon>201308221608372_UsersMigration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308221753300_SongsMigration.cs" />
+    <Compile Include="Migrations\201308221753300_SongsMigration.Designer.cs">
+      <DependentUpon>201308221753300_SongsMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308241940421_SongsMigration1.cs" />
+    <Compile Include="Migrations\201308241940421_SongsMigration1.Designer.cs">
+      <DependentUpon>201308241940421_SongsMigration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308251140036_UserMigration.cs" />
+    <Compile Include="Migrations\201308251140036_UserMigration.Designer.cs">
+      <DependentUpon>201308251140036_UserMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\SecurityModels.cs" />
+    <Compile Include="Models\UserModels.cs" />
+    <Compile Include="Models\SongModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,15 +189,19 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Typeahead.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\stripes.png" />
     <Content Include="Content\images\stroke.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Custom\PrometheusForms.js" />
+    <Content Include="Scripts\Custom\PrometheusModelValidation.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
@@ -203,6 +227,26 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Users\Profile.cshtml" />
+    <Content Include="Views\Users\EditorTemplates\User.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LongDateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Money.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Bool.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ComboBox.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Money.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MoneyDisabled.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Switch.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Term.cshtml" />
+    <Content Include="Views\Playlists\Index.cshtml" />
+    <Content Include="Views\Playlists\Edit.cshtml" />
+    <Content Include="Views\Playlists\EditorTemplates\Playlist.cshtml" />
+    <Content Include="Views\Playlists\Delete.cshtml" />
+    <Content Include="Views\Playlists\Songs.cshtml" />
+    <Content Include="Views\Songs\Delete.cshtml" />
+    <Content Include="Views\Songs\Edit.cshtml" />
+    <Content Include="Views\Songs\EditorTemplates\Song.cshtml" />
+    <Content Include="Views\Users\Signin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -219,6 +263,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201308211650507_UsersMigration.resx">
       <DependentUpon>201308211650507_UsersMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308221608372_UsersMigration1.resx">
+      <DependentUpon>201308221608372_UsersMigration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308221753300_SongsMigration.resx">
+      <DependentUpon>201308221753300_SongsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308241940421_SongsMigration1.resx">
+      <DependentUpon>201308241940421_SongsMigration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308251140036_UserMigration.resx">
+      <DependentUpon>201308251140036_UserMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
