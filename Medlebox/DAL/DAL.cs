@@ -47,18 +47,55 @@ namespace Medlebox.DAL
             User dbentity = GetUser(user.Gid);
             if (dbentity == null)
             {
-                //if (user.FavoriteProject!=null) db.Entry(user.FavoriteProject).State = EntityState.Unchanged;
+                List<ValidationError> errors = new List<ValidationError>();
+                User found = GetUser(user.Email);
+                if (found != null)
+                    errors.Add(new ValidationError("Email", "Пользователь с таким адресом уже есть"));
+
+                if (user.PasswordChange == null)
+                    errors.Add( new ValidationError("PasswordChange", "Пароль не может быть пустым"));
+                if (user.PasswordChange != user.PasswordConfirm)
+                {
+                    errors.Add(new ValidationError("PasswordChange", " "));
+                    errors.Add(new ValidationError("PasswordConfirm", "Введенные пароли не совпадают"));
+                }
+                if (errors.Count() > 0)
+                    throw new ValidationException(errors);
+                user.SetPwdHash();
                 db.Users.Add(user);
             }
             else
             {
+                List<ValidationError> errors = new List<ValidationError>();
+                if (user.Nickname == null)
+                    errors.Add(new ValidationError("NickName", "Необходимо указать имя"));
+                if (user.MusicSource==MusicSource.NotSet)
+                   errors.Add(new ValidationError("MusicSource", "Необходимо выбрать источник музыки"));
                 if (user.Gid != CurrentUser.Gid)
-                    throw new ValidationException(new List<ValidationError> { new ValidationError("","Нельзя изменить чужой профиль.") });
+                   errors.Add(new ValidationError("", "Нельзя изменить чужой профиль."));
+                if (errors.Count() > 0)
+                    throw new ValidationException(errors);
+
                 user.Email = dbentity.Email;
-                if (user.Password != null)
+
+                if (user.PasswordChange != null)
                 {
-                    if (user.Password != user.PasswordConfirm)
-                        throw new ValidationException(new List<ValidationError> { new ValidationError("PasswordConfirm", "Введенные пароли не совпадают") });
+                    User found = GetUser(user.Email);
+                    bool UserValid = false;
+                    if (found != null)
+                    {
+                        user.PwdHash = found.PwdHash;
+                        UserValid = user.TryLogin();
+                    }
+                    if (!UserValid)
+                        errors.Add(new ValidationError("Password", "Неверный пароль"));
+                    if (user.PasswordChange != user.PasswordConfirm)
+                    {
+                        errors.Add(new ValidationError("PasswordChange", " "));
+                        errors.Add(new ValidationError("PasswordConfirm", "Введенные пароли не совпадают"));
+                    }
+                    if (errors.Count() > 0)
+                        throw new ValidationException(errors);
                     user.SetPwdHash();
                 }
                 user.PwdHash = user.PwdHash??dbentity.PwdHash;

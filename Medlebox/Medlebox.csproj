@@ -197,9 +197,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <None Include="Properties\PublishProfiles\Medlebox.com.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Custom\PrometheusForms.js" />
     <Content Include="Scripts\Custom\PrometheusModelValidation.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />

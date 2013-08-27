@@ -11,7 +11,7 @@
 @using (Html.BeginForm("Signin", "Users", FormMethod.Post, new { @class = "form-inline" }))
 {
 <p>@Html.TextBoxFor(model => model.Email, new { @class = "span2",placeholder="Почта" })  @Html.ValidationMessageFor(model => model.Email, "", new { style = "color:white;" })</p>
-<p>@Html.PasswordFor(model => model.Password, new { @class = "span2",placeholder="Пароль" }) &nbsp;  @Html.PasswordFor(model => model.PasswordConfirm, new { @class = "span2" ,placeholder="Повторить пароль"})  @Html.ValidationMessageFor(model => model.Password, "", new { style = "color:white;" })  @Html.ValidationMessageFor(model => model.PasswordConfirm, "", new { style = "color:white;" })</p>
+<p>@Html.PasswordFor(model => model.PasswordChange, new { @class = "span2",placeholder="Пароль" , autocomplete="off"}) &nbsp;  @Html.PasswordFor(model => model.PasswordConfirm, new { @class = "span2" ,placeholder="Повторить пароль", autocomplete="off"})  @Html.ValidationMessageFor(model => model.PasswordChange, "", new { style = "color:white;" })  @Html.ValidationMessageFor(model => model.PasswordConfirm, "", new { style = "color:white;" })</p>
 <p><input type="submit" value="Вход"class=" btn btn-primary" /> </p>
 }
 </div>

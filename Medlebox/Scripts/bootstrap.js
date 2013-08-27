@@ -215,7 +215,8 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     }, 0)
   }
 
-                     Button.prototype.toggle = function () {
+
+  Button.prototype.toggle = function () {
     var $parent = this.$element.closest('[data-toggle="buttons-radio"]')
     var css = $parent.attr("data-toggle-css");
     if (css == undefined) css = 'btn-primary';

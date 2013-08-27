@@ -32,12 +32,6 @@ namespace Medlebox.Controllers
             {
                 try
                 {
-                    if (user.Password==null)
-                        throw new ValidationException(new List<ValidationError> { new ValidationError("Password", "Пароль не может быть пустым") });
-                    if (user.Password != user.PasswordConfirm)
-                        throw new ValidationException(new List<ValidationError> { new ValidationError("PasswordConfirm", "Введенные пароли не совпадают") ,
-                        new ValidationError("Password", " ")});
-                    user.SetPwdHash();
                     dal.SaveUser(user);
                     dal.CurrentUser = user;
                     FormsAuthentication.SetAuthCookie(user.Email, true);

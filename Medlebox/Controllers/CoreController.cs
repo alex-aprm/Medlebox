@@ -59,6 +59,7 @@ namespace Medlebox.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
 
+
             string controller = filterContext.RouteData.Values["controller"].ToString().ToLower();
             string action = filterContext.RouteData.Values["action"].ToString().ToLower();
             string url = filterContext.HttpContext.Request.RawUrl.ToString();
@@ -67,6 +68,14 @@ namespace Medlebox.Controllers
 
             ViewBag.LoggedIn=HttpContext.User.Identity.IsAuthenticated;
             ViewBag.Controller = controller;
+            if (HttpContext.User.Identity.IsAuthenticated && controller!="Users" && action !="profile")
+            {
+                if (dal.CurrentUser.Nickname == null || dal.CurrentUser.MusicSource == MusicSource.NotSet)
+                {
+                    filterContext.Result = new RedirectResult(Url.Action("Profile","Users"));
+                    return;
+                }
+            }
 
             if (!modal)
             {

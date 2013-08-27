@@ -34,14 +34,13 @@ namespace Medlebox.Models
         [NotMapped]
         public string Password { get; set; }
         [NotMapped]
+        public string PasswordChange { get; set; }
+        [NotMapped]
         public string PasswordConfirm { get; set; }
         [MaxLength(500)]
         public byte[] PwdHash { get; set; }
         [Range(0, 2, ErrorMessage = "К сожалению, данный источник не поддерживается")]
-
         public MusicSource MusicSource { get; set; }
-
-
         public string Name
         {
             get
@@ -58,7 +57,7 @@ namespace Medlebox.Models
         public void SetPwdHash()
         {
             SHA1 sha = new SHA1CryptoServiceProvider();
-            this.PwdHash = sha.ComputeHash(Encoding.ASCII.GetBytes(this.Password + this.Email.ToLower()));
+            this.PwdHash = sha.ComputeHash(Encoding.ASCII.GetBytes(this.PasswordChange + this.Email.ToLower()));
         }
 
         public virtual List<Playlist> PlayLists { get; set; }

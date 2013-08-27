@@ -1,0 +1,19 @@
+﻿@model Medlebox.Models.Playlist
+
+@{
+    ViewBag.Title = "Плейлист";
+}
+
+<h2>@Html.DisplayFor(m=>m.Name)</h2>
+
+@using (Html.BeginForm("Edit", "Playlists", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+    <fieldset>
+        @Html.EditorFor(m => m)
+
+<div class="form-actions">
+                    <input type="submit" class="btn btn-large btn-primary" value="Сохранить" id="btn-save" data-action="" />
+    </div>
+</fieldset>
+}

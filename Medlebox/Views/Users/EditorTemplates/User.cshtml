@@ -17,11 +17,38 @@
 		</div>
 
 <hr />
+<div class="control-group" id="ChangePassLinkDiv">
+    <div class="controls">
+<a href="#" id ="ChangePassLink">Изменить пароль</a>
+        </div>
+ </div>
+<div id="ChangePass">
 <div class="control-group">
-			<label class="control-label">Новый пароль</label>
+			<label class="control-label">Старый пароль</label>
 			<div class="controls">@Html.PasswordFor(model => model.Password, new { @class = "span4" })  @Html.ValidationMessageFor(model => model.Password)</div>
 		</div>
 <div class="control-group">
-			<label class="control-label">Еще раз</label>
-			<div class="controls">@Html.PasswordFor(model => model.PasswordConfirm, new { @class = "span4" })  @Html.ValidationMessageFor(model => model.PasswordConfirm)</div>
+			<label class="control-label">Новый пароль</label>
+			<div class="controls">@Html.PasswordFor(model => model.PasswordChange, new { @class = "span4", autocomplete="off" })  @Html.ValidationMessageFor(model => model.PasswordChange)</div>
 		</div>
+<div class="control-group">
+			<label class="control-label">Еще раз</label>
+			<div class="controls">@Html.PasswordFor(model => model.PasswordConfirm, new { @class = "span4", autocomplete="off" })  @Html.ValidationMessageFor(model => model.PasswordConfirm)</div>
+		</div>
+</div>
+<script type="text/javascript">
+    if ($("#ChangePass").find(".input-validation-error").attr("id") == undefined) {
+        $("#ChangePass").hide();
+    } else {
+        $("#ChangePassLinkDiv").hide();
+
+    }
+    $("#ChangePassLink").click(function (e) {
+        e.preventDefault();
+        $("#ChangePassLinkDiv").slideUp();
+        $("#ChangePass").fadeIn();
+    });
+
+
+
+</script>
