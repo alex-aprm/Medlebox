@@ -7,10 +7,10 @@
 <div style="position:absolute;top:50%;height:50%;background-color:#46074f;left:0px;width:100%;" ></div>
 
 <div style="position:absolute;bottom:50%; left:50%;">
-@using (Html.BeginForm("Login", "Users", FormMethod.Post, new { @class = "form-inline" }))
+@using (Html.BeginForm("Login", "Users", new { ReturnUrl = Request.Params["ReturnUrl"] }, FormMethod.Post, new { @class = "form-inline" }))
 {
-		@Html.TextBoxFor(model => model.Email, new { @class = "span2", placeholder="Почта" })
-		@:&nbsp;@Html.PasswordFor(model => model.Password, new { @class = "span2", placeholder="Пароль" })
+		@Html.TextBoxFor(model => model.Email, new { @class = "span2", placeholder = "Почта" })
+		@:&nbsp;@Html.PasswordFor(model => model.Password, new { @class = "span2", placeholder = "Пароль" })
 	    @:&nbsp;<input type="submit" value="Вход"class=" btn btn-primary" /> 
 }
 </div>		

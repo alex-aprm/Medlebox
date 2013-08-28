@@ -64,11 +64,13 @@ namespace Medlebox.Controllers
             string action = filterContext.RouteData.Values["action"].ToString().ToLower();
             string url = filterContext.HttpContext.Request.RawUrl.ToString();
             bool reset = filterContext.HttpContext.Request.Params["reset"] == "True";
+            bool getback = filterContext.HttpContext.Request.Params["getback"] == "True";
             bool modal = filterContext.HttpContext.Request.Params["modal"] == "True";
 
             ViewBag.LoggedIn=HttpContext.User.Identity.IsAuthenticated;
             ViewBag.Controller = controller;
-            if (HttpContext.User.Identity.IsAuthenticated && controller!="Users" && action !="profile")
+            if (HttpContext.User.Identity.IsAuthenticated && controller!="Users" && action !="profile"
+                && dal.CurrentUser!=null)
             {
                 if (dal.CurrentUser.Nickname == null || dal.CurrentUser.MusicSource == MusicSource.NotSet)
                 {
@@ -81,7 +83,7 @@ namespace Medlebox.Controllers
             {
                 if (action == "index")
                 {
-                    if (Session["IndexUrl"] != null && Session["NonIndexUrl"] != null && !reset)
+                    if (Session["IndexUrl"] != null && Session["NonIndexUrl"] != null && getback)
                     {
                         url = Session["IndexUrl"].ToString();
                         Session.Remove("NonIndexUrl");
