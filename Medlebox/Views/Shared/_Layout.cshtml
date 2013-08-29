@@ -1,7 +1,22 @@
 ﻿<!DOCTYPE html>
-@{
-    ViewBag.AdditionalContainerClass=ViewBag.AdditionalContainerClass??"whitesheet";
+@if (ViewBag.LoggedIn){
+    ViewBag.SheetClass = "sheet";
+    ViewBag.StripesClass = "darkstripes";
+} else
+{
+    ViewBag.SheetClass = "";
+    ViewBag.StripesClass = "stripes";
 }
+@if (IsSectionDefined("Annotation"))
+{
+    ViewBag.StickClass = "stickright";
+    ViewBag.SpanClass = "span9";
+} else
+{
+    ViewBag.StickClass = "";
+    ViewBag.SpanClass = "";
+}
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,7 +32,7 @@
     <script src="~/Scripts/Custom/PrometheusModelValidation.js"></script>
     <script src="~/Scripts/Custom/PrometheusForms.js"></script>
 </head>
-<body class="@ViewBag.AdditionalContainerClass">
+<body class="@ViewBag.StripesClass">
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
    <div class="container">
@@ -25,26 +40,57 @@
     @if (ViewBag.LoggedIn){
     <ul class="nav pull-right">
       <li class=""><a href="/">Плеер</a></li>
-      <li class=""><a href="@Url.Action("Index", "Playlists", new { Reset = true })" data-controller="playlists">Плейлисты</a></li>
+      <li class=""><a href="@Url.Action("Index", "Playlists")" data-controller="playlists">Плейлисты</a></li>
       <li class=""><a href="#">Поиск</a></li>
-      <li class=""><a href="@Url.Action("Profile","Users", new { Reset = true })" data-controller="users">Профиль</a></li>
-      <li class=""><a href="@Url.Action("Logout","Users", new { Reset = true })">Выход</a></li>
+      <li class=""><a href="@Url.Action("Profile","Users")" data-controller="users">Профиль</a></li>
+      <li class=""><a href="@Url.Action("Logout","Users")">Выход</a></li>
     </ul>
     }
     </div>
   </div>
 </div>
-
-
-    <div class="container ">
-    @RenderBody()
+@if (ViewBag.LoggedIn){
+<div id="wrapper">
+    <div class="container whitespace">
     </div>
+</div>
+}
+    <div class="container">
+        <div class="row-fluid">
+          <div class="@ViewBag.SpanClass">
+          <div class="@ViewBag.SheetClass @ViewBag.StickClass">
+            @RenderBody()
+          </div>
+          </div>
+            @if (IsSectionDefined("Annotation"))
+            {
+            <div class="span3">
+                 <div class="sheet stickleft pad">
+                     @RenderSection("Annotation", false)
+                 </div>
+            </div>
+            }
+        </div>
+</div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
     <script type="text/javascript">
         currenturl = "@ViewBag.Controller";
         $("a[data-controller='" + currenturl + "']").parent().toggleClass("active");
+        $(".sheet").find(".form-actions").each(function (e) {
+            $(this).toggleClass("form-actions-sheet");
+        });
+        $('.twitter-typeahead').each(function(e)
+        {
+            $(this).toggleClass("span12");
+            name = $(this).find(".tt-query").attr("Name");
+            id = $(this).find(".tt-query").attr("id");
+            $("span[data-valmsg-for=" + name + "]").insertAfter("#" + id);
+            $("span[data-valmsg-for=" + name + "]").toggleClass("fve-wrapper");
+        });
+
     </script>
         <script type="text/javascript">
             BindEvents();

@@ -62,7 +62,7 @@ namespace Medlebox.Controllers
             if (UserValid)
             {
                 dal.CurrentUser = found;
-                FormsAuthentication.SetAuthCookie(user.Email, true);
+                FormsAuthentication.SetAuthCookie(user.Email,true);
                 if (Url.IsLocalUrl(ReturnUrl) && ReturnUrl.Length > 1 && ReturnUrl.StartsWith("/")
                     && !ReturnUrl.StartsWith("//") && !ReturnUrl.StartsWith("/\\"))
                 {
@@ -118,7 +118,7 @@ namespace Medlebox.Controllers
                     try
                     {
                         dal.SaveUser(user);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home", new { Back = true });
                     }
                     catch (ValidationException ex)
                     {

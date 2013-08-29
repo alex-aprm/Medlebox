@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Signin";
-    ViewBag.AdditionalContainerClass="";
+    ViewBag.Splash = true;
 }
 @model Medlebox.Models.User
 <div style="position:absolute;bottom:50%; left:20%;"><img alt="Medlebox" src="/Content/images/stroke.png"/></div>
@@ -10,8 +10,8 @@
 <div style="position:absolute;top:50%; left:50%;padding-top:15px;">
 @using (Html.BeginForm("Signin", "Users", FormMethod.Post, new { @class = "form-inline" }))
 {
-<p>@Html.TextBoxFor(model => model.Email, new { @class = "span2",placeholder="Почта" })  @Html.ValidationMessageFor(model => model.Email, "", new { style = "color:white;" })</p>
-<p>@Html.PasswordFor(model => model.PasswordChange, new { @class = "span2",placeholder="Пароль" , autocomplete="off"}) &nbsp;  @Html.PasswordFor(model => model.PasswordConfirm, new { @class = "span2" ,placeholder="Повторить пароль", autocomplete="off"})  @Html.ValidationMessageFor(model => model.PasswordChange, "", new { style = "color:white;" })  @Html.ValidationMessageFor(model => model.PasswordConfirm, "", new { style = "color:white;" })</p>
+<p>@Html.TextBoxFor(model => model.Email, new { @class = "span10",placeholder="Почта" })  @Html.ValidationMessageFor(model => model.Email, "", new { style = "color:white;" })</p>
+<p>@Html.PasswordFor(model => model.PasswordChange, new { @class = "span5",placeholder="Пароль" , autocomplete="off"}) &nbsp;@Html.PasswordFor(model => model.PasswordConfirm, new { @class = "span5" ,placeholder="Повторить пароль", autocomplete="off"})  @Html.ValidationMessageFor(model => model.PasswordChange, "", new { style = "color:white;" })  @Html.ValidationMessageFor(model => model.PasswordConfirm, "", new { style = "color:white;" })</p>
 <p><input type="submit" value="Вход"class=" btn btn-primary" /> </p>
 }
 </div>

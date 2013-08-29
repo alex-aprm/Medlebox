@@ -151,7 +151,9 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\CoreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\DAL.Songs.cs" />
     <Compile Include="DAL\DAL.cs" />
+    <Compile Include="DAL\DAL.Playlists.cs" />
     <Compile Include="DAL\DB.cs" />
     <Compile Include="DAL\Validation.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,6 +191,7 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\darkstripes.png" />
     <Content Include="Content\Typeahead.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
@@ -196,6 +199,7 @@
     <Content Include="Content\images\stroke.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Compile Include="DAL\DAL.Users.cs" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Properties\PublishProfiles\Medlebox.com.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />

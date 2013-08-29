@@ -4,7 +4,7 @@
 
 <div class="control-group">
 			<label class="control-label">Исполнитель</label>
-			<div class="controls">@Html.TextBoxFor(model => model.Artist, new { @class = "span5" })  <span class="fve-wrapper">@Html.ValidationMessageFor(model => model.Artist)</span></div>
+			<div class="controls">@Html.TextBoxFor(model => model.Artist, new { @class = "span5" })  @Html.ValidationMessageFor(model => model.Artist)</div>
 		</div>
 <div class="control-group">
 			<label class="control-label">Название</label>
@@ -13,10 +13,20 @@
 
 
 <script type="text/javascript">
-$('#Artist').typeahead({                                
-  name: '',                                                          
-  remote: '/api/songsAPI/getallartists?q=%QUERY',
-  limit: 10
-});
+    $('#Artist').typeahead({
+        name: '',
+        remote: '/api/songsAPI/getallartists?q=%QUERY',
+        limit: 10,
+        updater: function (selection) {
+            alert("TEST");
+            return selection;
+        }
+    });
+
+    $('#Title').typeahead({
+        name: '',
+        remote: '/api/songsAPI/getallsongsbyartist?artist='+$('#Artist').attr('value')+'&q=%QUERY',
+        limit: 10
+    });
 
 </script>
