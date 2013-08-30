@@ -10,7 +10,23 @@
 {
 
     <fieldset>
-        @Html.EditorFor(m => m)
+
+<table class="table table-hover">
+    @foreach (Medlebox.Models.SongInPlaylist s in Model.Songs)
+    {
+    <tr>
+        <td style="width:10px"><i class="icon-play"></i></td>
+        <td><strong>@s.Song.Artist</strong> - @s.Song.Title</td>
+        <td style="width:32px"><a href="@Url.Action("Delete", "Playlists", new { id = s.Gid })"><i class="icon-remove"></i></a></td>
+    </tr>
+    }
+    <tr>
+        <td></td>
+        <td>    <i class="icon-plus"></i> <a href="@Url.Action("Select", "Songs", new { id = Guid.NewGuid() })">Добавить</a>
+</td>
+        <td></td>
+    </tr>
+</table>
 
 <div class="form-actions">
                     <input type="submit" class="btn btn-large btn-primary" value="Сохранить" id="btn-save" data-action="" />
