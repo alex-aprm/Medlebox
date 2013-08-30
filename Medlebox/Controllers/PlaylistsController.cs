@@ -49,7 +49,7 @@ namespace Medlebox.Controllers
                     try
                     {
                         dal.SavePlaylist(playlist);
-                        return RedirectToAction("Index", "Home", new { Back = true });
+                        return RedirectToAction("Index", "Playlists", new { Back = true });
                     }
                     catch (ValidationException ex)
                     {
@@ -74,7 +74,7 @@ namespace Medlebox.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             dal.DeletePlaylist(id);
-            return RedirectToAction("Index", "Songs", new { Back = true });
+            return RedirectToAction("Index", "Playlists", new { Back = true });
         }
 
     }

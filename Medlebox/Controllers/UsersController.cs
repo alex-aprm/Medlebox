@@ -62,7 +62,7 @@ namespace Medlebox.Controllers
             if (UserValid)
             {
                 dal.CurrentUser = found;
-                FormsAuthentication.SetAuthCookie(user.Email,true);
+                FormsAuthentication.SetAuthCookie(user.Email,false);
                 if (Url.IsLocalUrl(ReturnUrl) && ReturnUrl.Length > 1 && ReturnUrl.StartsWith("/")
                     && !ReturnUrl.StartsWith("//") && !ReturnUrl.StartsWith("/\\"))
                 {
