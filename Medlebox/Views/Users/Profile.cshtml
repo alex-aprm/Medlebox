@@ -1,10 +1,10 @@
 ﻿@model Medlebox.Models.User
 
 @{
-    ViewBag.Title = "Profile";
+    ViewBag.Title = "Профиль";
 }
+<div id="ProfileWrapper" data-modal="Wrapper">
 <h2>Профиль @Model.Name</h2>
-
 @using (Html.BeginForm("Profile", "Users", FormMethod.Post, new { @class = "form-horizontal" }))
 {
 
@@ -16,3 +16,4 @@
     </div>
 </fieldset>
 }
+</div>

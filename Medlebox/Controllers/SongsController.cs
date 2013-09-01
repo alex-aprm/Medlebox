@@ -4,36 +4,37 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Medlebox.Models;
-using Medlebox.Models;
 using Medlebox.DAL;
 
 namespace Medlebox.Controllers
 {
-            [Authorize]
+    [Authorize]
 
     public class SongsController : BaseController
     {
         //
         // GET: /Playlists/
 
-        //public ActionResult Index()
-        //{
-        //    List<Playlist> l = dal.GetPlaylists(dal.CurrentUser);
-        //    return View(l);
-        //}
+        public ActionResult Index(string q)
+        {
+            if (q == null)
+                return View(new List<Song>());
+            List<Song> l = dal.GetSongsBySearch(q) ;
+            return View(l);
+        }
 
-                public ActionResult Create()
-                {
-                    Song  s = new Song();
-                    return View("Edit",s);
-                }
+        public ActionResult Create()
+        {
+            Song s = new Song();
+            return View("Edit", s);
+        }
 
-                public ActionResult Edit(Guid? id)
-                {
-                    Song s = dal.GetSong((Guid)id);
-                    if (s == null) s = new Song();
-                    return View(s);
-                }
+        public ActionResult Edit(Guid? id)
+        {
+            Song s = dal.GetSong((Guid)id);
+            if (s == null) s = new Song();
+            return View(s);
+        }
 
         [HttpPost]
         public ActionResult Edit(Song song, string SubAction, string RoleGid)

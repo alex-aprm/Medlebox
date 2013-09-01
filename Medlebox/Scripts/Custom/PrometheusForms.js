@@ -30,8 +30,7 @@ function BindEvents() {
         cache: false
     });
 
-
-
+ 
 
     $('a[data-toggle="prometheusmodal"]').unbind("click");
     $('a[data-toggle="prometheusmodal"]').click(function (e) {
@@ -65,7 +64,8 @@ function BindEvents() {
                 });
                 $(modalid).css("z-index", index_highest + 1);
                 // $(".modal-backdrop").css("z-index", index_highest);
-                $(modalid).modal();
+                $(modalid).modal(
+                    );
 
                 $(modalid).unbind('hide');;
                 $(modalid).on('hidden', function (e) {
@@ -194,10 +194,19 @@ function DecorateModal(id, modalid) {
             $(this).bind("click", function (e) {
                 e.preventDefault();
                 objid = $(this).attr("data-value");
-                $(this).parents(".modal").modal('hide');
+                if ($(this).attr("data-mutiple") == undefined) {
+                    $(this).parents(".modal").modal('hide');
+                } else {
+                    tag = $(this).attr("data-select-hide");
+                    if (tag != undefined) {
+                        $(this).closest(tag).fadeOut();
+                    }
+
+                }
                 fieldid = $(this).attr("data-select");
                 $("#" + fieldid).attr("value", objid);
                 $("#" + fieldid).change();
+                
                 action=$("#" + fieldid).attr("data-refresh-action");
                 if (action == undefined) action = "";
                 if (action == "") return;

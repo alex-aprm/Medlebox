@@ -30,6 +30,10 @@ namespace Medlebox.DAL
         public Playlist GetPlaylist(Guid Gid)
         {
             Playlist p = db.Playlists.AsNoTracking().FirstOrDefault(pp => pp.Gid == Gid);
+            if (p != null)
+            {
+                p.Songs = p.Songs.OrderBy(s => s.NumOrder).ToList();
+            }
             return p;
         }
         public void SavePlaylist(Playlist playlist)
@@ -45,7 +49,16 @@ namespace Medlebox.DAL
             }
             else
             {
-                db.UpdateGraph(playlist);
+                foreach (SongInPlaylist sp in playlist.Songs)
+                {
+                    sp.NumOrder = playlist.Songs.IndexOf(sp);
+                }
+
+                db.UpdateGraph(playlist, p=>p.OwnedCollection(pp=>pp.Songs));
+                foreach (SongInPlaylist sp in playlist.Songs)
+                {
+                    db.Entry(sp.Song).State = EntityState.Unchanged;
+                }
             }
 
             try

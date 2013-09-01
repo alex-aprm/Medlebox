@@ -1,0 +1,12 @@
+﻿@model Medlebox.Models.SongInPlaylist
+     @Html.HiddenFor(p=>p.Gid)
+     @Html.HiddenFor(p=>p.NumOrder)
+     @Html.HiddenFor(p=>p.Played)
+     @Html.HiddenFor(p=>p.Song.Artist)
+     @Html.HiddenFor(p=>p.Song.Title)
+    <tr>
+        <td style="width:10px"><i class="icon-play"></i></td>
+        <td>@Html.DisplayFor(m=>m.Song)</td>
+        <td style="width:32px"><a role="button" data-refresh="songsinplaylist" href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { SongGid = Model.Gid,SubAction="RemoveSong"  })"><i class="icon-remove"></i></a></td>
+    </tr>
+

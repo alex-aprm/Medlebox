@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Medlebox.Models.Playlist>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Плейлисты";
 }
 
 <h2>Плейлисты</h2>
@@ -10,7 +10,7 @@
     {
     <tr>
         <td style="width:10px"><i class="icon-play"></i></td>
-        <td><a href="@Url.Action("Songs", "Playlists", new { id = p.Gid })">@Html.DisplayFor(m=>p.Name)</a></td>
+        <td><a href="@Url.Action("Songs", "Playlists", new { id = p.Gid })">@Html.DisplayFor(m=>p.Name)</a>@if(p.SongsCount>0) {@Html.Raw(" ("+p.SongsCount+")");}</td>
         <td style="width:32px"><a href="@Url.Action("Edit", "Playlists", new { id = p.Gid })"><i class="icon-pencil"></i></a>
                              <a href="@Url.Action("Delete", "Playlists", new { id = p.Gid })"><i class="icon-remove"></i></a></td>
     </tr>

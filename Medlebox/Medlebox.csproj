@@ -145,6 +145,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\SongsAPIController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
     <Compile Include="Controllers\PlaylistsController.cs" />
@@ -179,6 +180,10 @@
     <Compile Include="Migrations\201308251140036_UserMigration.cs" />
     <Compile Include="Migrations\201308251140036_UserMigration.Designer.cs">
       <DependentUpon>201308251140036_UserMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308311457416_SongTitleMigration.cs" />
+    <Compile Include="Migrations\201308311457416_SongTitleMigration.Designer.cs">
+      <DependentUpon>201308311457416_SongTitleMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserModels.cs" />
@@ -228,7 +233,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
@@ -252,6 +256,11 @@
     <Content Include="Views\Songs\Edit.cshtml" />
     <Content Include="Views\Songs\EditorTemplates\Song.cshtml" />
     <Content Include="Views\Users\Signin.cshtml" />
+    <Content Include="Views\Songs\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Song.cshtml" />
+    <Content Include="Views\Playlists\EditorTemplates\SongInPlaylist.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -280,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308251140036_UserMigration.resx">
       <DependentUpon>201308251140036_UserMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308311457416_SongTitleMigration.resx">
+      <DependentUpon>201308311457416_SongTitleMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

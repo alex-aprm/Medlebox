@@ -14,7 +14,7 @@ namespace Medlebox.Models
         {
             this.Gid = Guid.NewGuid();
         }
-       [Key]
+        [Key]
         public Guid Gid { get; set; }
         [MaxLength(500)]
         [Required(ErrorMessage="Кто исполняет?")]
@@ -22,6 +22,7 @@ namespace Medlebox.Models
         [MaxLength(500)]
         [Required(ErrorMessage = "Как называется песня?")]
         public string Title { get; set; }
+        public string TitleWithoutArticle { get; set; }
         public string Name
         {
             get

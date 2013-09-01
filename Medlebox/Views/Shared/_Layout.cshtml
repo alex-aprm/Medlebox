@@ -1,4 +1,8 @@
 ﻿<!DOCTYPE html>
+@{
+    ViewBag.LoggedIn = ViewBag.LoggedIn ?? true;
+}
+
 @if (ViewBag.LoggedIn){
     ViewBag.SheetClass = "sheet";
     ViewBag.StripesClass = "darkstripes";
@@ -21,7 +25,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>Medlebox - @ViewBag.Title</title>
         @Styles.Render("~/Content/typeahead")
         @Styles.Render("~/Content/bootstrap")
         @Styles.Render("~/Content/Site.css")
@@ -33,6 +37,9 @@
     <script src="~/Scripts/Custom/PrometheusForms.js"></script>
 </head>
 <body class="@ViewBag.StripesClass">
+        @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
    <div class="container">
@@ -42,7 +49,7 @@
       <li class=""><a href="/">Плеер</a></li>
       <li class=""><a href="@Url.Action("Index", "Playlists")" data-controller="playlists">Плейлисты</a></li>
       <li class=""><a href="#">Поиск</a></li>
-      <li class=""><a href="@Url.Action("Profile","Users")" data-controller="users">Профиль</a></li>
+      <li class=""><a href="@Url.Action("Profile","Users")" data-controller="users" >Профиль</a></li>
       <li class=""><a href="@Url.Action("Logout","Users")">Выход</a></li>
     </ul>
     }
@@ -50,14 +57,15 @@
   </div>
 </div>
 @if (ViewBag.LoggedIn){
-<div id="wrapper">
+<div id="contentwrapper">
     <div class="container whitespace">
     </div>
 </div>
 }
     <div class="container">
+
         <div class="row-fluid">
-          <div class="@ViewBag.SpanClass">
+          <div id="maincolumn" class="@ViewBag.SpanClass">
           <div class="@ViewBag.SheetClass @ViewBag.StickClass">
             @RenderBody()
           </div>
@@ -73,8 +81,6 @@
         </div>
 </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
 
     <script type="text/javascript">
         currenturl = "@ViewBag.Controller";
@@ -95,6 +101,10 @@
         <script type="text/javascript">
             BindEvents();
     </script>
+
+     <div id="ProfileModal" class="modal hide fade"  tabindex="-1"
+     data-supresswizard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>	
 
 </body>
 </html>

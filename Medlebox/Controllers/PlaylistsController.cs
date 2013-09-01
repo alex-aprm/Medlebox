@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Medlebox.Models;
-using Medlebox.Models;
 using Medlebox.DAL;
 
 namespace Medlebox.Controllers
@@ -48,8 +47,18 @@ namespace Medlebox.Controllers
                 {
                     try
                     {
+                        Playlist dbentity = dal.GetPlaylist(playlist.Gid);
+                        if (dbentity != null)
+                        {
+                            playlist.Songs = dbentity.Songs;
+                        }
                         dal.SavePlaylist(playlist);
-                        return RedirectToAction("Index", "Playlists", new { Back = true });
+                        bool IsNew = dbentity == null;
+                        if (IsNew)
+                            return RedirectToAction("Songs", "Playlists", new { id = playlist.Gid });
+                        else
+                            return RedirectToAction("Index", "Playlists", new { Back = true });
+
                     }
                     catch (ValidationException ex)
                     {
@@ -61,6 +70,35 @@ namespace Medlebox.Controllers
                 }
 
             }
+            return View(playlist);
+        }
+
+        [HttpPost]
+        public ActionResult Songs(Playlist playlist, string SubAction, string SongGid)
+        {
+                ModelState.Clear();
+                switch (SubAction)
+                {
+                    case "AddSong":
+                        Song s = dal.GetSong(Guid.Parse(SongGid));
+
+                        SongInPlaylist ss = new SongInPlaylist();
+                        ss.Song = s;
+                        ss.NumOrder = playlist.SongsCount;
+
+                        playlist.Songs.Add(ss);
+                        break;
+                    case "RemoveSong":
+                        SongInPlaylist SongToRemove = playlist.Songs.FirstOrDefault(p => p.Gid == Guid.Parse(SongGid));
+                        if (SongToRemove != null)
+                        {
+                            playlist.Songs.Remove(SongToRemove);
+                        }
+                        break;
+                }
+
+                        dal.SavePlaylist(playlist);
+
             return View(playlist);
         }
 

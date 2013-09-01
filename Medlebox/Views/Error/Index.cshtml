@@ -1,0 +1,23 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Ошибка";
+}
+
+<h2>Ошибка</h2>
+<div class="pad"><p>Пожалуйста, <a href="mailto:support@medlebox.com">обратитесь в поддержку</a> с описание действий, которые привели сюда.</p></div>
+ @if (Model != null && HttpContext.Current.IsDebuggingEnabled)
+    {
+        <div class="pad">
+            <p>
+                <b>Exception:</b> @Model.Exception.Message<br />
+                <b>Controller:</b> @Model.ControllerName<br />
+                <b>Action:</b> @Model.ActionName
+            </p>
+            <div style="overflow:scroll">
+                <pre>
+@Model.Exception.StackTrace
+                </pre>
+            </div>
+        </div>
+    }
