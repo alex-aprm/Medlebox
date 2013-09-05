@@ -13,17 +13,10 @@
 
     <fieldset>
 <div id="songsinplaylist">
-<table class="table table-hover">
+<table class="table dnd">
    @Html.EditorFor(s=>s.Songs)
-    <tr>
-        <td></td>
-        <td><i class="icon-plus"></i> <a data-select="NewSongGid" data-target="#SongsSearch" data-refresh="songsinplaylist" data-toggle="prometheusmodal"
-             id="AddSongLink"
-             href="@Url.Action("Index", "Songs", new { id = Guid.NewGuid() })">Добавить</a>
-</td>
-        <td></td>
-    </tr>
-</table>
+    <tr><td></td><td></td><td></td></tr>
+ </table>
 </div>
    
 @Html.Hidden("NewSongGid")
@@ -35,13 +28,41 @@
         $("#NewSongLink").attr("href",href);
         $("#NewSongLink").click();
     });
+
+@section BindEvents {
+    $("table.dnd").tableDnD({
+        onDragClass: "info",
+ 
+        onDrop: function (table, row) {
+            console.log($(row).find('input[type="hidden"]').val());
+        }
+    });
+}   
 </script>
 
-<div class="form-actions">
+@*<div class="form-actions">
                     <a class="btn" href="@Url.Action("Index")" >Назад</a>
-    </div>
+    </div>*@
 </fieldset>
 }
  <div id="SongsSearch" class="modal hide fade wider"  tabindex="-1"
      data-supresswizard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>		
+
+
+@section Annotation {
+<div >
+    <p></p><p>
+        <i class="icon-plus"></i> <a data-select="NewSongGid" data-target="#SongsSearch" data-refresh="songsinplaylist" data-toggle="prometheusmodal"
+             id="AddSongLink"
+             href="@Url.Action("Index", "Songs", new { id = Guid.NewGuid() })">Добавить песни</a>
+    </p><p>
+         <i class="icon-pencil"></i> <a
+             href="@Url.Action("Edit", "Playlists", new { id = Model.Gid })"> Плейлист</a>
+        </p>
+     <p>
+         <i class="icon-list"></i> <a
+             href="@Url.Action("Index", "Playlists")"> Назад к списку</a>
+        </p> 
+</div>
+    }

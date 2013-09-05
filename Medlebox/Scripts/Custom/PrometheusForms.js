@@ -18,6 +18,8 @@ function getUrlVars(url) {
 }
 function BindEvents() {
     //$(".datepicker").remove();
+    CustomBindEvents();
+
     $('[data-date="True"]').each(function (e) {
         $(this).datepicker({
             weekStart: 1 // day of the week start. 0 for Sunday - 6 for Saturday

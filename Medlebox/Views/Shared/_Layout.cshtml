@@ -13,12 +13,13 @@
 }
 @if (IsSectionDefined("Annotation"))
 {
-    ViewBag.StickClass = "stickright";
-    ViewBag.SpanClass = "span9";
-} else
+    ViewBag.MainSpanClass = "span9";
+    ViewBag.MainStickClass = "stickright";
+}
+else
 {
-    ViewBag.StickClass = "";
-    ViewBag.SpanClass = "";
+    ViewBag.MainSpanClass = "";
+    ViewBag.MainStickClass = "";
 }
 
 <html>
@@ -33,14 +34,15 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/typeahead")
+    <script src="~/Scripts/jquery.tablednd.js"></script>
     <script src="~/Scripts/Custom/PrometheusModelValidation.js"></script>
     <script src="~/Scripts/Custom/PrometheusForms.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.jmp3.js"></script>
 </head>
 <body class="@ViewBag.StripesClass">
-        @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-
-<div class="navbar navbar-fixed-top">
+@*        @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
+<div class="navbar navbar-fixed-top stickbottom">
   <div class="navbar-inner">
    <div class="container">
     <a class="brand" href="/">Medlebox</a>
@@ -56,55 +58,48 @@
     </div>
   </div>
 </div>
-@if (ViewBag.LoggedIn){
-<div id="contentwrapper">
-    <div class="container whitespace">
-    </div>
+<div class="wrapper">
+
+
+<div class="wrapper1">
+<div class="container whitespace"></div>
 </div>
-}
+
+
     <div class="container">
-
-        <div class="row-fluid">
-          <div id="maincolumn" class="@ViewBag.SpanClass">
-          <div class="@ViewBag.SheetClass @ViewBag.StickClass">
-            @RenderBody()
-          </div>
-          </div>
-            @if (IsSectionDefined("Annotation"))
+      <div class="row-fluid">
+        <div id="maincolumn" class="@ViewBag.MainSpanClass"">
+          <div class="@ViewBag.SheetClass @ViewBag.MainStickClass">
+                @RenderBody()
+              </div>
+        </div><!--/span-->
+                      @if (IsSectionDefined("Annotation"))
             {
-            <div class="span3">
-                 <div class="sheet stickleft pad">
-                     @RenderSection("Annotation", false)
-                 </div>
-            </div>
+        <div class="span3">
+        <div class="sheet stickleft"> @RenderSection("Annotation", false)</div>
+        </div><!--/span-->
             }
+
+      </div><!--/row-->
         </div>
-</div>
-
-
+ 
     <script type="text/javascript">
         currenturl = "@ViewBag.Controller";
         $("a[data-controller='" + currenturl + "']").parent().toggleClass("active");
         $(".sheet").find(".form-actions").each(function (e) {
             $(this).toggleClass("form-actions-sheet");
         });
-        //$('.twitter-typeahead').each(function(e)
-        //{
-        //    $(this).toggleClass("span12");
-        //    name = $(this).find(".tt-query").attr("Name");
-        //    id = $(this).find(".tt-query").attr("id");
-        //    $("span[data-valmsg-for=" + name + "]").insertAfter("#" + id);
-        //    $("span[data-valmsg-for=" + name + "]").toggleClass("fve-wrapper");
-        //});
-
     </script>
         <script type="text/javascript">
             BindEvents();
+            function CustomBindEvents() {
+            @RenderSection("BindEvents",false)
+            }
     </script>
 
      <div id="ProfileModal" class="modal hide fade"  tabindex="-1"
      data-supresswizard="true" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>	
-
+</div>
 </body>
 </html>

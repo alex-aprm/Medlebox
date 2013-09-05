@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace Medlebox.Controllers
 {
-    public class CoreController : Controller
+    public abstract class CoreController : Controller
     {
         public CoreController(string MedleboxConnection)
             : base()
@@ -109,7 +109,7 @@ namespace Medlebox.Controllers
     }
 
 
-    public class CoreAPIController : ApiController
+    public abstract class CoreAPIController : ApiController
     {
         public CoreAPIController(string MedleboxConnection)
             : base()

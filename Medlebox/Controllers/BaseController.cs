@@ -10,18 +10,34 @@ using System.Web.Http;
 
 namespace Medlebox.Controllers
 {
-    public class BaseController : CoreController
+#if DEBUG
+    public abstract class BaseController : CoreController
+    {
+        public BaseController()
+            : base(God.GetConnectionString("MedleboxConnectionTEST"))
+        {}
+    }
+
+    public abstract class BaseAPIController : CoreAPIController
+    {
+        public BaseAPIController()
+            : base(God.GetConnectionString("MedleboxConnectionTEST"))
+        { }
+    }
+#else
+    public abstract class BaseController : CoreController
     {
         public BaseController()
             : base(God.GetConnectionString("MedleboxConnection"))
         {}
     }
 
-    public class BaseAPIController : CoreAPIController
+    public abstract class BaseAPIController : CoreAPIController
     {
         public BaseAPIController()
             : base(God.GetConnectionString("MedleboxConnection"))
         { }
     }
 
+#endif
 }
