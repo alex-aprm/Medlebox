@@ -10,11 +10,14 @@
 
 @if (ViewBag.SongName!=null)
 {
-<div id="external" class="mp3" style="visibility:hidden;" >@ViewBag.SongName</div><script type="text/javascript">
+<div id="external" class="mp3" style="visibility:hidden;" >@ViewBag.SongName</div>
+<script type="text/javascript">
     $("#external").jmp3({
-        showfilename: "false",        backcolor: "ffd700",
+        showfilename: "false",
+        backcolor: "ffd700",
         forecolor: "8B4513",
         showdownload: "false"
-    });</script>
+    });
+</script>
 }
     
