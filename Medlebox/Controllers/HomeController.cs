@@ -12,9 +12,14 @@ namespace Medlebox.Controllers
     [Authorize]
     public class HomeController : BaseController
     {
+        public ActionResult Test()
+        {
+            Response.Write("hi");
+            HttpContext.ApplicationInstance.CompleteRequest();
+            return new EmptyResult();
+        }
         //
         // GET: /Home/
-
         public ActionResult Index(Guid? Gid)
         {
             string SongName = "";
@@ -36,11 +41,19 @@ namespace Medlebox.Controllers
                 CQ response = webClient.DownloadString(url + "/search/");
                 string resource = response[".listen_href:first"].Attr("data-resource");
                 webClient.QueryString.Clear();
+                //ViewBag.resource = resource;
+                //ViewBag.url = url + "/save/" + resource;
                 response = webClient.DownloadString(url + "/save/" + resource);
                 string link = url + response["#download_url"].Attr("href");
                 link = link.Split(new string[] { "/mp3/" }, StringSplitOptions.RemoveEmptyEntries)[0];
 
-                ViewBag.SongName = link;
+                var client = new WebClient();
+                
+                var stream = client.OpenRead(link);
+                return File(stream, "audio/mpeg");
+                
+
+               // ViewBag.SongName = SongName;
             }
             return View();
         }

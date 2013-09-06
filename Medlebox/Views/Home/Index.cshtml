@@ -7,17 +7,30 @@
 <div class="pad">
 <p>Добрый день! Так получилось, что сервис претерпевает глобальные изменения. Какое-то время он не работал и не будет работать, но когда заработает...</p>
     </div>
-
 @if (ViewBag.SongName!=null)
 {
-<div id="external" class="mp3" style="visibility:hidden;" >@ViewBag.SongName</div>
+<p>@ViewBag.resource</p>
+    
+    
+<div id="player" class="mp3" @*style="visibility:hidden;"*@ ></div>
 <script type="text/javascript">
-    $("#external").jmp3({
-        showfilename: "false",
-        backcolor: "ffd700",
-        forecolor: "8B4513",
-        showdownload: "false"
-    });
+    url = "@ViewBag.url?callback=callbackFunc";
+   
+    var script = document.createElement('SCRIPT');
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+    
+    function callbackFunc(data) {
+        $("#player").text("TEST");
+    }
+    //function setPlayer() {
+    //    $("#player").jmp3({
+    //        showfilename: "false",
+    //        backcolor: "ffd700",
+    //        forecolor: "8B4513",
+    //        showdownload: "false"
+    //    });
+    //}
 </script>
 }
     
