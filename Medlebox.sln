@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medlebox", "Medlebox\Medlebox.csproj", "{566F6983-B21B-4BF6-BB00-5574C304E421}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medlebox.Tests", "Medlebox.Tests\Medlebox.Tests.csproj", "{044B504B-ED0B-4036-9EDF-C7BB231C77EA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{566F6983-B21B-4BF6-BB00-5574C304E421}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{566F6983-B21B-4BF6-BB00-5574C304E421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{566F6983-B21B-4BF6-BB00-5574C304E421}.Release|Any CPU.Build.0 = Release|Any CPU
-		{044B504B-ED0B-4036-9EDF-C7BB231C77EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{044B504B-ED0B-4036-9EDF-C7BB231C77EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{044B504B-ED0B-4036-9EDF-C7BB231C77EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{044B504B-ED0B-4036-9EDF-C7BB231C77EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

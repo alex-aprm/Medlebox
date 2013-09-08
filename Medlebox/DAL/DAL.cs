@@ -27,7 +27,18 @@ namespace Medlebox.DAL
             this.db = new MedleboxDB(WeathertopConnection);
             //God.GiveMeMaps();
         }
-        
+        public Song GetPlayable(Guid Gid)
+        {
+            Song song = this.GetSong(Gid);
+            if (song == null)
+            {
+                Playlist playlist = this.GetPlaylist(Gid );
+                if (playlist != null)
+                    if (playlist.SongsCount > 0)
+                        song = playlist.Songs.First().Song;
+            }
+            return song;
+        }
         public void Dispose()
         {
             this.db.Dispose();

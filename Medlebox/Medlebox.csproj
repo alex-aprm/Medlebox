@@ -149,6 +149,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SongsAPIController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
     <Compile Include="Controllers\PlaylistsController.cs" />
@@ -164,6 +165,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Global\God.cs" />
+    <Compile Include="Global\MP3Producer.cs" />
     <Compile Include="Migrations\201308211650507_UsersMigration.cs" />
     <Compile Include="Migrations\201308211650507_UsersMigration.Designer.cs">
       <DependentUpon>201308211650507_UsersMigration.cs</DependentUpon>
