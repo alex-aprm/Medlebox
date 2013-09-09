@@ -43,6 +43,7 @@ namespace Medlebox.Models
         public virtual Song Song { get; set; }
         public virtual int NumOrder { get; set; }
         public bool Played { get; set; }
+        public virtual Playlist Playlist { get; set; }
     }
 
     public class Playlist

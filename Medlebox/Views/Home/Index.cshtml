@@ -7,12 +7,12 @@
 <div class="pad">
 <p>Добрый день! Так получилось, что сервис претерпевает глобальные изменения. Какое-то время он не работал и не будет работать, но когда заработает...</p>
     </div>
-@if (ViewBag.SongName!=null)
+ @* @if (ViewBag.SongName!=null)
 {
 <p>@ViewBag.resource</p>
     
-    
-<div id="player" class="mp3" @*style="visibility:hidden;"*@ ></div>
+  
+<div id="player" class="mp3" style="visibility:hidden;" ></div>
 <script type="text/javascript">
     url = "@ViewBag.url?callback=callbackFunc";
    
@@ -32,5 +32,4 @@
     //    });
     //}
 </script>
-}
-    
+}*@

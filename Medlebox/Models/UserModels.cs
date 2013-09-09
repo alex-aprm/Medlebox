@@ -61,6 +61,7 @@ namespace Medlebox.Models
         }
 
         public virtual List<Playlist> PlayLists { get; set; }
+        public virtual SongInPlaylist NowPlaying { get; set; }
     }
 
     public enum MusicSource

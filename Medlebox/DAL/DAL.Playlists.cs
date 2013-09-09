@@ -36,6 +36,25 @@ namespace Medlebox.DAL
             }
             return p;
         }
+        public SongInPlaylist GetSongInPlaylist(Guid Gid)
+        {
+            SongInPlaylist p = db.SongsInPlaylist.AsNoTracking().FirstOrDefault(pp => pp.Gid == Gid);
+          
+            return p;
+        }
+        public SongInPlaylist GetPlayable(Guid Gid)
+        {
+            SongInPlaylist song = this.GetSongInPlaylist(Gid);
+            if (song == null)
+            {
+                Playlist playlist = this.GetPlaylist(Gid);
+                if (playlist != null)
+                    if (playlist.SongsCount > 0)
+                        song = playlist.Songs.First();
+            }
+            return song;
+        }
+ 
         public void SavePlaylist(Playlist playlist)
         {
             Playlist dbentity = GetPlaylist(playlist.Gid);

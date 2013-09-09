@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201308311457416_SongTitleMigration.Designer.cs">
       <DependentUpon>201308311457416_SongTitleMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309091742304_SongAndUsersMigration.cs" />
+    <Compile Include="Migrations\201309091742304_SongAndUsersMigration.Designer.cs">
+      <DependentUpon>201309091742304_SongAndUsersMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\SongModels.cs" />
@@ -269,6 +273,7 @@
     <Content Include="Views\Playlists\EditorTemplates\SongInPlaylist.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Player\Play.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -300,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308311457416_SongTitleMigration.resx">
       <DependentUpon>201308311457416_SongTitleMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309091742304_SongAndUsersMigration.resx">
+      <DependentUpon>201309091742304_SongAndUsersMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

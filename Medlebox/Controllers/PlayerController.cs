@@ -17,13 +17,15 @@ namespace Medlebox.Controllers
             return View();
         }
 
-        public ActionResult Play(Guid? Gid)
+        public ActionResult Play(Guid? id)
         {
-            Song song = dal.GetPlayable(Gid ?? Guid.Empty);
+            SongInPlaylist songin = dal.GetPlayable(id ?? Guid.Empty);
+            ViewBag.SongUrl = Url.Action("mp3", "songs", new { id = songin.Song.Gid });
+            Playlist p = dal.GetPlaylist(songin.Playlist.Gid);
 
-
-          
-            return View("Index");
+            ViewBag.Song = songin;
+            ViewBag.Playlist = p;
+            return View(p.Songs);
         }
 
 

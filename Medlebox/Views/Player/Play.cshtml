@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Medlebox.Models.SongInPlaylist>
+@{
+    ViewBag.Title = "Плейлисты";
+}    
+@{
+    ViewBag.Title = "Сейчас играет";
+}
+<h2>@ViewBag.Title</h2>   
+<table class="table">
+@foreach (Medlebox.Models.SongInPlaylist s in Model)
+{
+if (ViewBag.Song.Gid == s.Gid)
+{
+<tr>
+<td style="width:10px">&nbsp;</td>
+<td><span class="currentsong">@Html.DisplayFor(m=>s.Song)</span></td></tr>
+}else{    
+<tr>
+<td style="width:10px"><a href="@Url.Action("Play","Player",new{id=s.Gid})"><i class="icon-play"></i></a></td>
+<td>@Html.DisplayFor(m=>s.Song)</td></tr>
+}
+}
+     <tr class="nodrop nodrag"><td></td><td></td></tr>
+   </table>
+@section Annotation {
+<div >
+    <p></p><p>
+         <i class="icon-list"></i> <a
+             href="@Url.Action("Songs", "Playlists", new { id = ViewBag.Playlist.Gid })"> Список песен</a>
+        </p>
+     <p>
+         <i class="icon-list"></i> <a
+             href="@Url.Action("Index", "Playlists")"> Список плейлистов</a>
+        </p> 
+</div>
+    }
+
+<div id="player" class="mp3" style="visibility:hidden;">@ViewBag.SongUrl</div>
+<script type="text/javascript">
+    function setPlayer() {
+        $("#player").jmp3({
+            showfilename: "false",
+            backcolor: "ffd700",
+            forecolor: "8B4513",
+            showdownload: "false"
+        });
+    }
+    setPlayer();
+</script>

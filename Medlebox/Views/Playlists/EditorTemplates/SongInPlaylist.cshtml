@@ -5,7 +5,7 @@
      @Html.HiddenFor(p=>p.Song.Artist)
      @Html.HiddenFor(p=>p.Song.Title)
     <tr>
-        <td class="dragHandle" style="width:8px"></td>
-        <td>@Html.DisplayFor(m=>m.Song) (<a href="@Url.Action("mp3","Songs",new{id=Model.Song.Gid})">play</a>)</td>
+        <td class="dragHandle" style="width:22px"><a href="@Url.Action("Play","Player",new{id=Model.Gid})"><i class="icon-play"></i></a></td>
+        <td>@Html.DisplayFor(m=>m.Song)</td>
         <td style="width:32px"><a role="button" data-refresh="songsinplaylist" href="@Url.Action(ViewContext.RouteData.Values["action"].ToString(), new { SongGid = Model.Gid,SubAction="RemoveSong"  })"><i class="icon-remove"></i></a></td>
     </tr>
