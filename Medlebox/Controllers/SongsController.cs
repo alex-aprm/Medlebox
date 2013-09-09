@@ -109,6 +109,7 @@ namespace Medlebox.Controllers
                     count = str.Read(buf, 0, buflength);
                     if (Response.IsClientConnected)
                         Response.OutputStream.Write(buf, 0, count);
+                    else break;
                 } while (count > 0);
 
                 str.Close();
