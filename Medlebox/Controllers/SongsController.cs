@@ -82,23 +82,25 @@ namespace Medlebox.Controllers
         }
 
 
-        public ActionResult mp3(Guid Gid)
+        public ActionResult mp3(Guid id)
         {
             string SongName = "";
-            Song song = dal.GetSong(Gid);
+            Song song = dal.GetSong(id);
             if (song != null) SongName = song.Name;
 
             if (SongName != "")
             {
                 string link = Global.MP3Producer.GetLinkFromOlolo(SongName);
-                Response.ClearHeaders();
                 var client = new WebClient();
                 Stream str = client.OpenRead(link);
                 WebHeaderCollection whc = client.ResponseHeaders;
                 int totalLength = (Int32.Parse(whc["Content-Length"]));
                 int count;
-                int buflength = totalLength;
+                int buflength = totalLength%10;
+                if (buflength < 10240) buflength = 10240;
                 byte[] buf = new byte[buflength];
+
+                Response.ClearHeaders();
                 Response.AddHeader("Content-Length", totalLength.ToString());
                 Response.ContentType = "audio/mpeg";
                 Response.BufferOutput = false;
