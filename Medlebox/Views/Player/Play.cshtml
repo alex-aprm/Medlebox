@@ -5,14 +5,16 @@
 @{
     ViewBag.Title = "Сейчас играет";
 }
-<h2>@ViewBag.Title</h2>   
+<h2>@ViewBag.Title</h2>
+<div id="playlist">
+<div id="SongUrl" class="tag">@ViewBag.SongUrl</div> 
 <table class="table">
 @foreach (Medlebox.Models.SongInPlaylist s in Model)
 {
 if (ViewBag.Song.Gid == s.Gid)
 {
 <tr>
-<td style="width:10px">&nbsp;</td>
+<td style="width:10px"></td>
 <td><span class="currentsong">@Html.DisplayFor(m=>s.Song)</span></td></tr>
 }else{    
 <tr>
@@ -22,6 +24,7 @@ if (ViewBag.Song.Gid == s.Gid)
 }
      <tr class="nodrop nodrag"><td></td><td></td></tr>
    </table>
+    </div>
 @section Annotation {
 <div >
     <p></p><p>
@@ -35,15 +38,70 @@ if (ViewBag.Song.Gid == s.Gid)
 </div>
     }
 
-<div id="player" class="mp3" style="visibility:hidden;">@ViewBag.SongUrl</div>
+<div id="jpId"></div>
 <script type="text/javascript">
+    var jPlayer;
     function setPlayer() {
-        $("#player").jmp3({
-            showfilename: "false",
-            backcolor: "ffd700",
-            forecolor: "8B4513",
-            showdownload: "false"
+        SongUrl = $("#SongUrl").text();
+        player = $("#jpId");
+        player.jPlayer({
+                ready: function () {
+                    setMedia(SongUrl);
+                },
+                ended: function () {
+                    SetSong($("#NextLink").attr("href"));
+                },
+                swfPath: "/Content/swf"
+            });
+    }
+    $(document).ready(function () {
+        setPlayer();
+        $("#NextLink").click(function PrevNextEvent(e) {
+            e.preventDefault();
+            href = $(this).attr("href");
+            SetSong(href);
+        });
+        $("#PrevLink").click(function PrevNextEvent(e) {
+            e.preventDefault();
+            href = $(this).attr("href");
+            SetSong(href);
+        });
+        //setTimeout(function () {
+        //    alert("TEST");
+        //     SetSong($("#NextLink").attr("href"));
+        //}, 5000);
+
+
+    });
+    function setMedia(link) {
+        player.jPlayer("setMedia", {
+            mp3: link
+        }).jPlayer("play");
+    }
+    
+    function SetSong(href) {
+        $.ajax({
+            type: "GET",
+            url: href,
+            success: function (data) {
+                $('#playlist').html($(data).find('#playlist').html());
+                $('#NextLink').attr("href", $(data).find('#NextLink').attr("href"));
+                $('#PrevLink').attr("href", $(data).find('#PrevLink').attr("href"));
+                SongUrl = $(data).find('#SongUrl').text();
+                Url = $(data).find('#Url').text();
+               // alert(Url);
+                setMedia(SongUrl);
+                history.pushState('', 'New URL: ' + Url, Url);
+            }
         });
     }
-    setPlayer();
 </script>
+
+@section Player {
+<div id="jp_container_1" class="pad">
+ <a id="PrevLink" href="@Url.Action("Prev",new {id=ViewBag.Song.Gid})"><i class="icon-backward"></i></a>
+ <a href="#" class="jp-play"><i class="icon-play"></i></a>
+ <a href="#" class="jp-pause"><i class="icon-pause"></i></a>
+ <a id="NextLink" href="@Url.Action("Next",new {id=ViewBag.Song.Gid})"><i class="icon-forward"></i></a>
+</div>
+}

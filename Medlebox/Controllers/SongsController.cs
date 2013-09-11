@@ -90,31 +90,39 @@ namespace Medlebox.Controllers
 
             if (SongName != "")
             {
-                string link = Global.MP3Producer.GetLinkFromOlolo(SongName);
-                var client = new WebClient();
-                Stream str = client.OpenRead(link);
-                WebHeaderCollection whc = client.ResponseHeaders;
-                int totalLength = (Int32.Parse(whc["Content-Length"]));
-                int count;
-                int buflength = totalLength%10;
-                if (buflength < 10240) buflength = 10240;
-                byte[] buf = new byte[buflength];
-
-                Response.ClearHeaders();
-                Response.AddHeader("Content-Length", totalLength.ToString());
-                Response.ContentType = "audio/mpeg";
-                Response.BufferOutput = false;
-                do
+                try
                 {
-                    count = str.Read(buf, 0, buflength);
-                    if (Response.IsClientConnected)
-                        Response.OutputStream.Write(buf, 0, count);
-                    else break;
-                } while (count > 0);
 
-                str.Close();
-                Response.End();
-                return new EmptyResult();
+                    string link = Global.MP3Producer.GetLinkFromOlolo(SongName);
+                    var client = new WebClient();
+                    Stream str = client.OpenRead(link);
+                    WebHeaderCollection whc = client.ResponseHeaders;
+                    int totalLength = (Int32.Parse(whc["Content-Length"]));
+                    int count;
+                    int buflength = totalLength % 10;
+                    if (buflength < 10240) buflength = 10240;
+                    byte[] buf = new byte[buflength];
+
+                    Response.ClearHeaders();
+                    Response.AddHeader("Content-Length", totalLength.ToString());
+                    Response.ContentType = "audio/mpeg";
+                    Response.BufferOutput = false;
+                    do
+                    {
+                        count = str.Read(buf, 0, buflength);
+                        if (Response.IsClientConnected)
+                            Response.OutputStream.Write(buf, 0, count);
+                        else break;
+                    } while (count > 0);
+
+                    str.Close();
+                    Response.End();
+                    return new EmptyResult();
+                }
+                catch (Exception e)
+                {
+                    return HttpNotFound();
+                }
             }
             return HttpNotFound();
         }

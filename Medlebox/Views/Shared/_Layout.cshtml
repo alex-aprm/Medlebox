@@ -11,7 +11,7 @@
     ViewBag.SheetClass = "";
     ViewBag.StripesClass = "stripes";
 }
-@if (IsSectionDefined("Annotation"))
+@if (IsSectionDefined("Annotation") || IsSectionDefined("Player"))
 {
     ViewBag.MainSpanClass = "span9";
     ViewBag.MainStickClass = "stickright";
@@ -26,6 +26,7 @@ else
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Medlebox - @ViewBag.Title</title>
         @Styles.Render("~/Content/typeahead")
         @Styles.Render("~/Content/bootstrap")
@@ -37,11 +38,12 @@ else
     <script src="~/Scripts/jquery.tablednd.js"></script>
     <script src="~/Scripts/Custom/PrometheusModelValidation.js"></script>
     <script src="~/Scripts/Custom/PrometheusForms.js"></script>
-<script type="text/javascript" src="~/Scripts/jquery.jmp3.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.jplayer.min.js"></script>
 </head>
 <body class="@ViewBag.StripesClass">
 @*        @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")*@
+<div id="Url" class="tag">@ViewBag.Url</div>
 <div class="navbar navbar-fixed-top stickbottom">
   <div class="navbar-inner">
    <div class="container">
@@ -68,15 +70,21 @@ else
 
     <div class="container">
       <div class="row-fluid">
-        <div id="maincolumn" class="@ViewBag.MainSpanClass"">
+        <div class="@ViewBag.MainSpanClass"">
           <div class="@ViewBag.SheetClass @ViewBag.MainStickClass">
                 @RenderBody()
               </div>
         </div><!--/span-->
-                      @if (IsSectionDefined("Annotation"))
+        @if (IsSectionDefined("Annotation"))
             {
         <div class="span3">
         <div class="sheet stickleft"> @RenderSection("Annotation", false)</div>
+        </div><!--/span-->
+            }
+        @if (IsSectionDefined("Player"))
+            {
+        <div class="span3">
+        <div class="sheet stickleft"> @RenderSection("Player", false)</div>
         </div><!--/span-->
             }
 

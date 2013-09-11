@@ -246,3 +246,8 @@ padding-right:0!important;
 .currentsong {
    font-size:larger;
 }
+
+.tag {
+    visibility: hidden;
+    position: absolute;
+}

@@ -58,7 +58,7 @@ namespace Medlebox.Controllers
        }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-
+            ViewBag.Url = Request.Url.AbsolutePath;
 
             string controller = filterContext.RouteData.Values["controller"].ToString().ToLower();
             string action = filterContext.RouteData.Values["action"].ToString().ToLower();
