@@ -18,7 +18,7 @@ namespace Medlebox.Global
             string resource = response[".listen_href:first"].Attr("data-resource");
             webClient.QueryString.Clear();
             response = webClient.DownloadString(url + "/save/" + resource);
-            string link = url + response["#download_url"].Attr("href");
+            string link = url + response["#download_standart"].Find("a.btn").Attr("href");
             link = link.Split(new string[] { "/mp3/" }, StringSplitOptions.RemoveEmptyEntries)[0];
 
 

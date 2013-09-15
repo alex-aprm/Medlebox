@@ -106,7 +106,6 @@ namespace Medlebox.DAL
         public IEnumerable<string> GetAllSongsByArtist(string Artist, string Query)
         {
             Query = Query.ToLower().Replace("the", "").Trim();
-
             List<string> l = db.Songs.AsNoTracking().Where(s =>s.Artist==Artist && s.TitleWithoutArticle.StartsWith(Query)).Select(s => s.Title).Distinct().ToList();
             return l;
         }
