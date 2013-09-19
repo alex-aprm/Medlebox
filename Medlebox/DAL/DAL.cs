@@ -25,7 +25,7 @@ namespace Medlebox.DAL
         public MedleboxDAL(string WeathertopConnection)
         {
             this.db = new MedleboxDB(WeathertopConnection);
-            //God.GiveMeMaps();
+            //God.GiveMeMaps(); //
         }
        public void Dispose()
         {
